@@ -2,20 +2,22 @@ import pokedex from './index.js';
 
 const getPokemons = async ({ offset = 0, limit = 50 } = {}) => {
   try {
-    const pokemons = await pokedex.getPokemonSpeciesList({
+    const pokemonSpeciesList = await pokedex.getPokemonSpeciesList({
       offset,
       limit,
     });
+    const pokemons = await pokedex.getPokemonsList({
+      offset,
+      limit: pokemonSpeciesList.results.length,
+    });
+
     const normalizedPokemons = await Promise.all(
       pokemons.results.map(async (pokemon) => {
-        const pokemonSpecies = await pokedex.getPokemonSpeciesByName(
-          pokemon.name
-        );
-        return await pokedex.getPokemonByName(pokemonSpecies.id);
+        return await pokedex.getPokemonByName(pokemon.name);
       })
     );
     return {
-      count: pokemons.count,
+      count: pokemonSpeciesList.count,
       results: normalizedPokemons,
     };
   } catch (error) {
