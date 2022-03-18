@@ -3,8 +3,8 @@ import pokedex from './index.js';
 const searchPokemon = async (pokemon, offset = 0, limit = 30) => {
   try {
     const pokemons = await pokedex.getPokemonSpeciesList();
-    const matchingPokemons = pokemons.results.filter((result) =>
-      result.name.includes(pokemon)
+    const matchingPokemons = pokemons.results.filter(
+      (result, index) => result.name.includes(pokemon) || index + 1 == pokemon
     );
     const trimmedMatchingPokemons = matchingPokemons.slice(
       offset,
