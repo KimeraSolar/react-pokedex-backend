@@ -43,3 +43,17 @@ app.get('/search-pokemon', async (req, res) => {
     res.send({});
   }
 });
+
+//Get pokemon details
+app.get('/get-pokemon-details', async (req, res) => {
+  try {
+    const { id } = req.query;
+    if (!parseInt(id)) throw new Error('Pokémon id must be passed.');
+    const result = await api.getPokemonDetails(id);
+    res.status(200);
+    res.send(result);
+  } catch (error) {
+    res.status(500);
+    res.send({});
+  }
+});
