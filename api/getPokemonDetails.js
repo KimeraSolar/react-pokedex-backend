@@ -20,7 +20,7 @@ const getPokemonDetails = async (id) => {
       id,
       name,
       gender_rate,
-      habitat: habitat.name,
+      habitat: habitat?.name,
       varieties,
       abilities,
       forms,
