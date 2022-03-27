@@ -13,7 +13,7 @@ const getPokemonDetails = async (id) => {
       is_hidden: slot.is_hidden,
     }));
     const forms = pokemonVariety.forms.map((form) => form.name);
-    const type = pokemonVariety.types.map((slot) => slot.type.name);
+    const types = pokemonVariety.types.map((slot) => slot.type.name);
     const { height, weight, sprites } = pokemonVariety;
 
     return {
@@ -27,7 +27,7 @@ const getPokemonDetails = async (id) => {
       artwork: sprites.other['official-artwork'].front_default,
       height,
       weight,
-      type,
+      types,
     };
   } catch (error) {
     console.log('Erro:', error);
